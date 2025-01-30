@@ -1,33 +1,34 @@
 package com.devsuperior.dslist.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_game")
+@Table(name = "tb_belonging")
 public class Belonging {
+
     @EmbeddedId
-    private  BelongingPK id = new BelongingPK();
+    private BelongingPK id = new BelongingPK();
 
     private Integer position;
 
-    public Belonging() {
-
+    public void setGame(Game game) {
+        id.setGame(game);
     }
 
-    public Belonging(Game game, GameList list, Integer position) {
-        this.id.setGame(game);
+    public Game getGame() {
+        return id.getGame();
+    }
+
+    public void setList(GameList list) {
         id.setList(list);
-        this.position = position;
     }
 
-    public BelongingPK getId() {
-        return id;
-    }
-
-    public void setId(BelongingPK id) {
-        this.id = id;
+    public GameList getList() {
+        return id.getList();
     }
 
     public Integer getPosition() {
@@ -39,15 +40,19 @@ public class Belonging {
     }
 
     @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Belonging belonging)) return false;
-
-        return id.equals(belonging.id);
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
-    public int hashCode() {
-        return id.hashCode();
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Belonging other = (Belonging) obj;
+        return Objects.equals(id, other.id);
     }
 }

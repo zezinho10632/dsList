@@ -1,5 +1,7 @@
 package com.devsuperior.dslist.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -10,18 +12,10 @@ public class BelongingPK {
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
+
     @ManyToOne
     @JoinColumn(name = "list_id")
     private GameList list;
-
-    public BelongingPK() {
-
-    }
-
-    public BelongingPK(Game game, GameList list) {
-        this.game = game;
-        this.list = list;
-    }
 
     public Game getGame() {
         return game;
@@ -40,17 +34,19 @@ public class BelongingPK {
     }
 
     @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BelongingPK that)) return false;
-
-        return game.equals(that.game) && list.equals(that.list);
+    public int hashCode() {
+        return Objects.hash(game, list);
     }
 
     @Override
-    public int hashCode() {
-        int result = game.hashCode();
-        result = 31 * result + list.hashCode();
-        return result;
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BelongingPK other = (BelongingPK) obj;
+        return Objects.equals(game, other.game) && Objects.equals(list, other.list);
     }
 }
