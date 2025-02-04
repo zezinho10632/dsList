@@ -20,6 +20,7 @@ public class Game {
     @Column(columnDefinition = "TEXT")
     private String LongDescription;
 
+
     public Game() {
 
     }
