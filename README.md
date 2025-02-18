@@ -74,10 +74,3 @@ dslist/
 ├── pom.xml                        # Dependências Maven
 ```
 
-
-Este README pode ser personalizado com:
-- Screenshots da API em ação
-- Diagrama de arquitetura
-- Exemplos de requests/responses
-- Badges adicionais
-- Link para documentação Swagger/OpenAPI (se disponível)
